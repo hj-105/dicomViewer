@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221.0em%22 font-size=%2280%22>😊</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebPacs Demo</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+  </head>
+  	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+	</body>
+  
+
+{% set n = sliceNum %}
+
+
+<body>
+<style>
+	.left-box {
+		position: relative;
+		background: LightGray;
+		float: left;
+	}
+	.right-box {
+		
+		background: rgba(255, 255, 255, 0.5);
+		float: right;
+	}
+	.right-json {
+		position: relative;
+		background: rgba(255, 255, 255, 0.5);
+		float: right;
+	}
+    .geeks {
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+    .geeks img {
+        width: 100%;
+        transition: 0.5s all ease-in-out;
+    }
+    .geeks:hover img {
+        transform: scale(1.5);
+    }
+
+</style> 
+
+    <div id="root"></div>
+    <script type="module" src="/src/mai n.tsx"></script>
+	<p></p>
+	<center>
+	<p><span style='font-weight: bold;font-size: 24pt;'>File name: {{fn}}</span></p>
+	<p>&nbsp;</p>
+	</center>
+	<div class='right-box', style="margin-right: 20%"><p>
+		<table border="1">
+			<th align = "center" bgcolor="skybule">attributes</th>
+			<th align = "center" bgcolor="skybule">values</th>
+			{% for i in range(6) %}
+			<tr align = "center">
+				<td>{{k[i]}}</td>
+				<td>{{v[i]}}</td>
+			</tr>
+			{% endfor %}
+		</table><p>&nbsp;</p>
+		<p><form method="POST"> slide [1 ~ {{sliceNum+1}}]
+			<input type="range" min="1" max={{sliceNum+1}} step="1" name="slice" list="tickmarks" value={{h+1}} oninput="slice_.value=this.value"/>
+			<datalist id="tickmarks">
+			</datalist>
+			<output name="slice_" for="range"></output>
+		<!--<input type="submit" value="submit" />-->
+		</form></p>
+		<p><form method="POST"> zoom [0 ~ 100] 
+			<input type="range" min="1" max=100 step="1" name="zoom" list="tickmarks" value={{h+1}} oninput="zoom_.value=this.value"/>
+			<datalist id="tickmarks">
+			</datalist>
+			<output name="zoom_" for="range"></output>
+			<!--<input type="submit" value="submit" />-->
+		</form></p><p>&nbsp;</p><p>&nbsp;</p>
+		</p><p><cneter><a href = "/saveJson"> save meta data as json </a><cneter>
+		</p><p><cneter><a href = "/saveJson_p"> save pixel data as json </a><cneter>
+		</p></div>
+		<p id="102b78d8-8765-4e3f-bfc2-87dcd4c0d3b5" class="image">
+			{% if slice %}
+				<img src="{{ url_for('static', filename='/image/'+a+'_'+slice+'.png') }}", width="600", style="margin-left: 20%"></p>
+			{% else %}
+				<img src="{{ url_for('static', filename='/image/'+a+'_'+h_+'.png') }}", width="600", style="margin-left: 20%"></p>
+			{% endif %}	
+		</body>
+</html>
